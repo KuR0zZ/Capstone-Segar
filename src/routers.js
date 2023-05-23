@@ -1,11 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-const {
-  getAllData,
-  inputData,
-} = require('./controllers/testDB')
+// const {
+//   getAllData,
+//   inputData,
+// } = require('./controllers/testDB')
 
-router.route('/').get(getAllData).post(inputData)
+const {
+  getDictionary,
+  postDictionary,
+} = require('./controllers/VegetableController')
+
+router.route('/').get(getDictionary).post(postDictionary)
 
 module.exports = router
