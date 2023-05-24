@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "automated-lore-386914",
+  "private_key_id": "f19d152c0256bb90ae619f88f71ced5e0c34e646",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCPv46xauFmfigF\nQ0BN2JNHj6LLxX8DZNCOZDYyRthvWLCn0eQ7UyHzcwbwwW6xut0oU08N4Mq1S/xo\nKbL7gOntSHZwP2iGm++6Looma4TsmJw1c+uW6EFbnstYJ4HKLKyYcM3lHP5Mt7ZC\ncL340uhTIxAUUc+V5NhB8VjZ19fEcmDdjMtRjW7a4D+6iFosilcDQRFyR2ahV2gJ\nDOPPKoG0VQvpetVVsJNtUL7Po6nY/X70ew2k8WNlSFq71SXJhfQp9kw8bIDwJIFU\n7gXp1ZqZqOpQpjrD2iYaZHE/w5W+jPOe/cBMf7hJOqq75dlsfNRivl/Ygi804MYg\nChKxSz4fAgMBAAECggEALGzJDq+3ZVOLzsSP9P7/1VfguhUZQdVAVyFFVphqf07r\nmZHWdTcmAPUFqhY9vZPAkZvdjK5yN0F6ij6I4A1hPkHsyJfwF9nNZr7HV0RXWj93\n11Ux8/tnZ4dV1LKw++h+lsYV+77QIKmOHE53h5S21Cq752u5Odv1sbuC+CAqwL0Z\n++5aI468DdqkNDropHR37nQyQ18FCHcPtvVhgEqdYHbUPIntiWLQt33Kj+wCpGdE\n+ND7HW3bmb/SQzOkBiRmQWhaT/IWXErZAazb6kwCOgTU6v8yN/nrpXGxyGrNhAoz\n9dHIi0N5sN4zAzsBTqL0IF4qrfIjtJPARLPvYX2MIQKBgQDAnmgA8QfGMzQbeeXY\nXNcz6U99W/jW/VcDlMdyYaFCT+799mXBK3yrlKIXbRHV8ynfEAt6RXV4oO1LN+0r\nRlxD4927iOKtYcsX7NGgw8TXBaUd53bXye1gv76Xvuk4NTjesM+wBkT0yedSekrf\n3tldwIbfEnTcIqd+N3+0MhNcKQKBgQC/DHSE/MkbpDnHZFCKqsDO4q6n78P6C9im\nz6qHHxGbRH53EUNqBVdyUhc0+eHakPDnz1QZK1i3OmpuGJ+dXLVMmfBGLNjYM9xQ\npufR70l1Q3zsZBPKu0gou9QYOBFFqZaDzbmZTF9BISM3Enw0Gpc4AEA2BbgqAlSF\nWxOu8R0RBwKBgQCqW6+qnYL9tg2w+2fgq4QeQoxuWCjGpLwPy8d2j4ibaKz8aq9m\nYLrb2hJeW7X5nx36TmuIUeRqsxIMg8M8kfdKiD90/MVXCXYhi+9/m4X9kt2NjEkc\n41gSSKQd+9izQMcylfiqO3FDe0sfNFACnktrUrs2klFO3Ut8I0PMMLnUuQKBgG1H\ng5LaQXK1MnOSNtvKpjTwxvS6mf/6LLfmC2X06I5G1Ivo7QXE/mse97VOxdjOlW4T\nUsh+2eUc3eoR3aMWd4HUf/K0DmlE6N2dSvbzh7Iyo09YQ1XwYGskXUJpN8AALF9C\nGsrMO6Q2fz0uLqtjFmJrCk+cX+ZvpMcO/KhRtM2bAoGAH+jTf8YTambpOLKGoR5X\n8WthnqNpa32v0L+gtqUaYQ+aYysLGHiqMwVX0AMfAd4AnS2sKLzyFaMXmByieTXa\nmHmyuV498TPP5cDj6W4EnUCpz0Jimu+xFT1PVnxAxWzC5k/cQoMOnCT6gICLuX6X\nwRpAXrkgm2OXENH5KNfOZT0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "capstone-segar@automated-lore-386914.iam.gserviceaccount.com",
+  "client_id": "114278841108775960521",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/capstone-segar%40automated-lore-386914.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
