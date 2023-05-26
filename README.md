@@ -11,27 +11,49 @@
 ```json
 {
   "error": false,
-  "message": "Image predictions",
+  "message": "Image uploaded & prediction made",
   "data": {
     "_id": "0001",
     "name": "sawi",
-    "predictions": "",
+    "predictions": "Sawi",
+    "score": 80 ,
     "image": "sawi.png",
     "createdAt":"2023-05-19T14:27:07.394+00:00"
   }
 }
 ```
 
-<!-- ### Predictions History
+### Result
 
-- Path : `/api/v1/vegetables/history`
+- Path : `/api/v1/vegetables/predictions/<predictionid>`
 - Method : `GET`
 - Example Response :
 
 ```json
 {
   "error": false,
-  "message": "Image uploaded",
+  "message": "Prediction fetched successfully",
+  "data": {
+    "_id": "0001",
+    "name": "sawi",
+    "predictions": "",
+    "score": 80 ,
+    "image": "sawi.png",
+    "createdAt":"2023-05-19T14:27:07.394+00:00"
+  }
+}
+```
+
+### Predictions History
+
+- Path : `/api/v1/vegetables/predictions`
+- Method : `GET`
+- Example Response :
+
+```json
+{
+  "error": false,
+  "message": "Predictions history fetched successfully",
   "data": [
     {
       "_id": "0001",
@@ -49,7 +71,7 @@
     }
   ]
 }
-``` -->
+```
 
 ### Vegetables Dictionary
 
@@ -104,3 +126,4 @@
   }
 }
 ```
+
