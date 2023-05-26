@@ -60,12 +60,14 @@
       "name": "Sawi",
       "predictions": "",
       "image": "sawi.png",
+      "score": 80 ,
       "createdAt": "2023-05-19T14:27:07.394+00:00"
     },
     {
       "_id": "0002",
       "name": "Tomat",
       "predictions": "",
+      "score": 80 ,
       "image": "tomat.png",
       "createdAt": "2023-05-19T14:27:07.394+00:00"
     }
