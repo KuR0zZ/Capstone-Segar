@@ -8,7 +8,7 @@ const connectDB = require('./db/connect')
 app.use(express.json())
 
 // Routes
-app.use('/api/v1/data', router)
+app.use('/api/v1/vegetables', router)
 
 const PORT = process.env.PORT || 5000
 

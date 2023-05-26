@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const {
-  getAllData,
-  inputData,
-} = require('./controllers/testDB')
+const predictionResult = require('./controllers/predictionsController')
 
-router.route('/').get(getAllData).post(inputData)
+router.route('/predictions/:id').get(predictionResult)
 
 module.exports = router
