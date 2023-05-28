@@ -1,9 +1,9 @@
-const Prediction = require('../models/Prediction')
+const Predictions = require('../models/Predictions')
 
 const predictionResult = async (req, res) => {
   try {
     const { id: predictionID } = req.params
-    const result = await Prediction.findOne({ _id: predictionID })
+    const result = await Predictions.findOne({ _id: predictionID })
 
     res.status(200).json({
       error: false,
