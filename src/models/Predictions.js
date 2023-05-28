@@ -4,10 +4,6 @@ const PredictSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  predictions: {
-    type: String,
-    required: true,
-  },
   score: {
     type: Number,
     required: true,

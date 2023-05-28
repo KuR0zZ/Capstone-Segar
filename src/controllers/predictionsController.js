@@ -37,7 +37,8 @@ const uploadImage = async (req, res) => {
 
       const prediction = await Predictions.create({
         name: req.body.name,
-        imageUrl: publicUrl,
+        score: req.body.score,
+        image: publicUrl,
       })
 
       res.status(201).json({
@@ -49,11 +50,6 @@ const uploadImage = async (req, res) => {
 
     blobStream.end(req.file.buffer)
   } catch (error) {
-    // if (error.code == 'LIMIT_FILE_SIZE') {
-    //   return res.status(500).send({
-    //     message: 'File size cannot be larger than 2MB!',
-    //   })
-    // }
     res.status(500).send({
       message: `Could not upload the image: ${req.file.originalname}. ${error}`
     })

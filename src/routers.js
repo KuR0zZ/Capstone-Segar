@@ -12,7 +12,7 @@ const multer = Multer({
 const { uploadImage } = require('./controllers/predictionsController')
 
 
-router.post('/', multer.single('image'), uploadImage)
+router.post('/predictions', multer.single('image'), uploadImage)
 
 
 module.exports = router
