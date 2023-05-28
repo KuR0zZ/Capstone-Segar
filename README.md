@@ -15,10 +15,9 @@
   "data": {
     "_id": "0001",
     "name": "sawi",
-    "predictions": "Sawi",
-    "score": 80 ,
+    "score": 80,
     "image": "sawi.png",
-    "createdAt":"2023-05-19T14:27:07.394+00:00"
+    "createdAt": "2023-05-19T14:27:07.394+00:00"
   }
 }
 ```
@@ -32,14 +31,13 @@
 ```json
 {
   "error": false,
-  "message": "Prediction fetched successfully",
+  "message": "Prediction result fetched successfully",
   "data": {
     "_id": "0001",
     "name": "sawi",
-    "predictions": "",
-    "score": 80 ,
+    "score": 80,
     "image": "sawi.png",
-    "createdAt":"2023-05-19T14:27:07.394+00:00"
+    "createdAt": "2023-05-19T14:27:07.394+00:00"
   }
 }
 ```
@@ -58,16 +56,14 @@
     {
       "_id": "0001",
       "name": "Sawi",
-      "predictions": "",
+      "score": 80,
       "image": "sawi.png",
-      "score": 80 ,
       "createdAt": "2023-05-19T14:27:07.394+00:00"
     },
     {
       "_id": "0002",
       "name": "Tomat",
-      "predictions": "",
-      "score": 80 ,
+      "score": 80,
       "image": "tomat.png",
       "createdAt": "2023-05-19T14:27:07.394+00:00"
     }
@@ -128,4 +124,3 @@
   }
 }
 ```
-
