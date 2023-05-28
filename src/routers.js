@@ -9,15 +9,8 @@ const multer = Multer({
   }
 })
 
-const {
-  uploadImage,
-  getAllImages,
-} = require('./controllers/imageController')
+const { uploadImage } = require('./controllers/predictionsController')
 
-
-// router.route('/').post(uploadImage).get(getAllImages)
-
-router.get('/', getAllImages)
 
 router.post('/', multer.single('image'), uploadImage)
 

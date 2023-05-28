@@ -4,7 +4,15 @@ const PredictSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imageUrl: {
+  predictions: {
+    type: String,
+    required: true,
+  },
+  score: {
+    type: Number,
+    required: true,
+  },
+  image: {
     type: String,
     required: true,
   },
@@ -12,6 +20,6 @@ const PredictSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   }
-}, {collection: 'Predictions'})
+}, { collection: 'Predictions' })
 
 module.exports = mongoose.model('Predictions', PredictSchema)

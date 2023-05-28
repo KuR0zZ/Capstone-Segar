@@ -1,10 +1,10 @@
-// const Data = require('../models/Data')
 const { format } = require('util')
 const { Storage } = require('@google-cloud/storage')
-const Predictions = require('../models/prediction')
+const Predictions = require('../models/Predictions')
+
 // Initialize storage with credentials
 const storage = new Storage({ keyFilename: 'google-cloud-key.json' })
-const bucket = storage.bucket('segar-app-bucket')
+const bucket = storage.bucket('segar-test-bucket')
 
 
 const uploadImage = async (req, res) => {
@@ -60,21 +60,6 @@ const uploadImage = async (req, res) => {
   }
 }
 
-const getAllImages = async (req, res) => {
-  try {
-    const images = await Predictions.find({})
-
-    res.status(200).json({ images });
-  } catch (err) {
-    console.log(err);
-
-    res.status(500).send({
-      message: "Unable to read list of files!",
-    });
-  }
-}
-
 module.exports = {
   uploadImage,
-  getAllImages,
 }
