@@ -9,8 +9,11 @@ const router = express.Router()
 const {
   getDictionary,
   postDictionary,
+  getDetailDictionary,
 } = require('./controllers/VegetableController')
 
 router.route('/').get(getDictionary).post(postDictionary)
+
+router.route('/:id').get(getDetailDictionary);
 
 module.exports = router
