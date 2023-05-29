@@ -10,7 +10,7 @@ const {
 const {
   getDictionary,
   postDictionary,
-  getDetailDictionary,
+  getDictionaryDetails,
 } = require('./controllers/vegetablesController')
 
 const multer = Multer({
@@ -20,9 +20,9 @@ const multer = Multer({
   }
 })
 
-router.route('/').get(getDictionary).post(postDictionary)
+router.route('/dictionaries').get(getDictionary).post(postDictionary)
 
-router.route('/:id').get(getDetailDictionary);
+router.route('/dictionaries/:id').get(getDictionaryDetails);
 
 router.post('/predictions', multer.single('image'), uploadImage)
 

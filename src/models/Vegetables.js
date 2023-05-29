@@ -12,15 +12,18 @@ const DataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  consumeable_part: {
+  consumable_part: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String,
   },
   origin: {
     type: String,
     required: true,
   },
-  information: {
+  brief_desc: {
     type: String,
     required: true,
   },
