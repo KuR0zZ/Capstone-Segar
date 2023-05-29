@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const router = require('./routers')
 const connectDB = require('./db/connect')
+require('./middleware/passport');
 
 // Middleware
 app.use(express.json())
