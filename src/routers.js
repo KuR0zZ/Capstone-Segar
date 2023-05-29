@@ -7,6 +7,11 @@ const {
   predictionResult,
 } = require('./controllers/predictionsController')
 
+const {
+  getDictionary,
+  postDictionary,
+} = require('./controllers/vegetablesController')
+
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
@@ -17,5 +22,7 @@ const multer = Multer({
 router.post('/predictions', multer.single('image'), uploadImage)
 
 router.route('/predictions/:id').get(predictionResult)
+
+router.route('/').get(getDictionary).post(postDictionary)
 
 module.exports = router
