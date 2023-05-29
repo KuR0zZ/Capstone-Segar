@@ -8,7 +8,7 @@ const StrategyJwt = passportJwt.Strategy;
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET
+    secretOrKey: process.env.JWT_SECRET,
 }
 
 passport.use( new StrategyJwt(options, async (jwt_payloads, done) => {
@@ -20,6 +20,7 @@ passport.use( new StrategyJwt(options, async (jwt_payloads, done) => {
             done(null, false)
         }
     } catch (err) {
+        res.status(200).json({message: 'ss'});
         done(err, false);
     }
 }))

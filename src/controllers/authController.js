@@ -10,11 +10,11 @@ const postRegister = async (req, res) => {
         const userAlreadyExist = await User.findOne({ email: email });
 
         if(userAlreadyExist){
-            return res.status(200).json({ success: true, msg: 'User already exist'});
+            return res.status(200).json({ error: false, msg: 'User already exist'});
         }
 
     } catch(err) {
-        return res.status(500).json({ success: false, msg: 'Something went wrong'});
+        return res.status(500).json({ error: true, msg: 'Something went wrong'});
     }
 
     try{
@@ -26,9 +26,9 @@ const postRegister = async (req, res) => {
         });
     
         await newUser.save();
-        return res.status(200).json({ success: true, msg: 'User registered'});
+        return res.status(200).json({ error: false, msg: 'User registered'});
     } catch (err) {
-        return res.status(500).json({ success: false, msg: 'Something went wrong, check your data'});
+        return res.status(500).json({ error: true, msg: 'Something went wrong, check your data'});
     }
 }
 
@@ -38,19 +38,41 @@ const postLogin = async (req, res) => {
     const userCheckWithEmail = await User.findOne({ email: email });
 
     if(!userCheckWithEmail){
-        return res.status(200).json({success: true, msg: 'User not found, check again your email and password'});
+        return res.status(200).json({error: false, msg: 'User not found, check again your email and password'});
     }
     
     if(!bcrypt.compare(userCheckWithEmail.password, password)){
-        return res.status(200).json({success: true, msg: 'User not found, check again your email and password'});
+        return res.status(200).json({error: false, msg: 'User not found, check again your email and password'});
     }
 
     const jwtToken = jwt.sign({ id: userCheckWithEmail._id, email: userCheckWithEmail.email }, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24});
 
-    res.status(200).json({ msg: 'Login successful', token: jwtToken});
+    const userData = {
+        id: userCheckWithEmail._id,
+        username: userCheckWithEmail.username,
+        email: userCheckWithEmail.email,
+        joinedAt: userCheckWithEmail.createdAt,
+    }
+    res.status(200).json({ message: 'Login successful', data: userData, token: jwtToken});
+}
+
+const postEditUser = async (req, res) => {
+    const {id, username, email, joinedAt} = req.body;
+    try {
+        const user = await User.findOne({ _id: id });
+    
+        user.username = username;
+    
+        await user.save();
+    
+        return res.status(200).json({ error: false, message: 'Data has been edited'});
+    } catch (err) {
+        return res.status(500).json({ error: true, message: 'Something went wrong'});
+    }
 }
 
 module.exports = {
     postRegister,
     postLogin,
+    postEditUser,
 }

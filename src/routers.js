@@ -16,6 +16,7 @@ const {
 const {
   postRegister,
   postLogin,
+  postEditUser,
 } = require('./controllers/authController')
 
 const multer = Multer({
@@ -25,7 +26,7 @@ const multer = Multer({
   }
 })
 
-router.route('/').get(getDictionary).post(postDictionary)
+router.route('/').get(passport.authenticate("jwt", { session: false }), getDictionary).post(postDictionary)
 
 router.route('/:id').get(getDetailDictionary);
 
@@ -36,5 +37,7 @@ router.route('/predictions/:id').get(predictionResult)
 router.route('/auth/register').post(postRegister);
 
 router.route('/auth/login').post(postLogin);
+
+router.route('/auth/user').post(postEditUser);
 
 module.exports = router
