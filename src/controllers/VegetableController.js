@@ -3,9 +3,9 @@ const Vegetables = require('../models/Vegetables');
 const getDictionary = async (req, res) => {
     try {
         const vegetables = await Vegetables.find({})
-        res.status(200).json({ success: true, nbHits: vegetables.length, vegetables })
+        return res.status(200).json({ success: true, nbHits: vegetables.length, vegetables })
     } catch (error) {
-        res.status(500).json({ success: false, msg: 'Something went wrong, try again later' })
+        return res.status(500).json({ success: false, msg: 'Something went wrong, try again later' })
     }
 }
 
@@ -29,9 +29,9 @@ const postDictionary = async (req, res) => {
             information: information,
         })
         vegetables.save();
-        res.status(200).json({ success: true, msg: 'Succes added data',  vegetables})
+        return res.status(200).json({ success: true, msg: 'Succes added data',  vegetables})
     } catch (err) {
-        res.status(500).json({ success: false, msg: 'Something went wrong, try again later' })
+        return res.status(500).json({ success: false, msg: 'Something went wrong, try again later' })
     }
 }
 
