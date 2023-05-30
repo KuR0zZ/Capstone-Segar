@@ -9,11 +9,11 @@ const postRegister = async (req, res) => {
         const userAlreadyExist = await User.findOne({ email: email });
 
         if(userAlreadyExist){
-            return res.status(200).json({ error: false, msg: 'User already exist'});
+            return res.status(200).json({ error: false, message: 'User already exist'});
         }
 
     } catch(err) {
-        return res.status(500).json({ error: true, msg: 'Something went wrong'});
+        return res.status(500).json({ error: true, message: 'Something went wrong'});
     }
 
     try{
@@ -38,11 +38,11 @@ const postLogin = async (req, res) => {
         const userCheckWithEmail = await User.findOne({ email: email });
     
         if(!userCheckWithEmail){
-            return res.status(200).json({error: false, msg: 'User not found, check again your email and password'});
+            return res.status(200).json({error: false, message: 'User not found, check again your email and password'});
         }
         
         if(!bcrypt.compare(userCheckWithEmail.password, password)){
-            return res.status(200).json({error: false, msg: 'User not found, check again your email and password'});
+            return res.status(200).json({error: false, message: 'User not found, check again your email and password'});
         }
     
         const jwtToken = jwt.sign({ 
@@ -64,14 +64,14 @@ const getUserData = async (req, res) => {
         const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
         const {id, username, email, joinedAt} = verifyToken;
     
-        return res.status(200).json({ error: false, message: "Data succesfully decoded", data: {id, username, email, joinedAt }})
+        return res.status(200).json({ error: false, message: "Data successfully decoded", data: {id, username, email, joinedAt }})
     } catch (err) {
         return res.status(200).json({ error: true, message: "Something went wrong"})
     }
 }
 
 const postEditUser = async (req, res) => {
-    const { id } = req.params.id;
+    const { id } = req.params;
     const { username, email } = req.body;
     try {
         const user = await User.findOne({ _id: id });
