@@ -43,6 +43,6 @@ router.route('/auth/login').post(postLogin);
 
 router.route('/auth/user').get(getUserData);
 
-router.route('/auth/user/:id').post(postEditUser);
+router.route('/auth/user/edit').post(postEditUser);
 
 module.exports = router

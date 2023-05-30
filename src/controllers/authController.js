@@ -38,11 +38,11 @@ const postLogin = async (req, res) => {
         const userCheckWithEmail = await User.findOne({ email: email });
     
         if(!userCheckWithEmail){
-            return res.status(200).json({error: false, message: 'User not found, check again your email and password'});
+            return res.status(401).json({error: false, message: 'User not found, check again your email and password'});
         }
         
-        if(!bcrypt.compare(userCheckWithEmail.password, password)){
-            return res.status(200).json({error: false, message: 'User not found, check again your email and password'});
+        if(bcrypt.compare(userCheckWithEmail.password, password)){
+            return res.status(401).json({error: false, message: 'User not found, check again your email and password'});
         }
     
         const jwtToken = jwt.sign({ 
@@ -71,7 +71,10 @@ const getUserData = async (req, res) => {
 }
 
 const postEditUser = async (req, res) => {
-    const { id } = req.params;
+    const token = req.headers.authorization.split(' ')[1];
+    const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+    const { id } = verifyToken;
+
     const { username, email } = req.body;
     try {
         const user = await User.findOne({ _id: id });
