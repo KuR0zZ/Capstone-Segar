@@ -31,7 +31,7 @@ const postDictionary = async (req, res) => {
             origin: origin,
             brief_desc: brief_desc,
         })
-        vegetables.save();
+        await vegetables.save();
         return res.status(200).json({ error: false, msg: 'Succes added data',  vegetables})
     } catch (err) {
         return res.status(500).json({ error: true, msg: 'Something went wrong, try again later' })
