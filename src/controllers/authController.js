@@ -1,4 +1,3 @@
-const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -27,9 +26,9 @@ const postRegister = async (req, res) => {
         });
     
         await newUser.save();
-        return res.status(200).json({ error: false, msg: 'User registered'});
+        return res.status(200).json({ error: false, message: 'User registered'});
     } catch (err) {
-        return res.status(500).json({ error: true, msg: 'Something went wrong, check your data'});
+        return res.status(500).json({ error: true, message: 'Something went wrong, check your data'});
     }
 }
 
@@ -46,28 +45,39 @@ const postLogin = async (req, res) => {
             return res.status(200).json({error: false, msg: 'User not found, check again your email and password'});
         }
     
-        const jwtToken = jwt.sign({ id: userCheckWithEmail._id, email: userCheckWithEmail.email }, process.env.JWT_SECRET);
-    
-        const userData = {
+        const jwtToken = jwt.sign({ 
             id: userCheckWithEmail._id,
             username: userCheckWithEmail.username,
             email: userCheckWithEmail.email,
             joinedAt: userCheckWithEmail.createdAt,
-            token: jwtToken
-        }
+        }, process.env.JWT_SECRET);
         
-        return res.status(200).json({ error:false, message: 'Login successful', data: userData });
+        return res.status(200).json({ error: false, message: 'Login successful', data: { token: jwtToken }});
     } catch (err) {
-        return res.status(200).json({ error:true, message: 'Something went wrong' });
+        return res.status(200).json({ error: true, message: 'Something went wrong' });
+    }
+}
+
+const getUserData = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+        const {id, username, email, joinedAt} = verifyToken;
+    
+        return res.status(200).json({ error: false, message: "Data succesfully decoded", data: {id, username, email, joinedAt }})
+    } catch (err) {
+        return res.status(200).json({ error: true, message: "Something went wrong"})
     }
 }
 
 const postEditUser = async (req, res) => {
-    const {id, username, email, joinedAt} = req.body;
+    const { id } = req.params.id;
+    const { username, email } = req.body;
     try {
         const user = await User.findOne({ _id: id });
     
         user.username = username;
+        user.email = email;
     
         await user.save();
     
@@ -81,4 +91,5 @@ module.exports = {
     postRegister,
     postLogin,
     postEditUser,
+    getUserData,
 }

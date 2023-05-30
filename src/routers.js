@@ -16,6 +16,7 @@ const {
 const {
   postRegister,
   postLogin,
+  getUserData,
   postEditUser,
 } = require('./controllers/authController')
 
@@ -38,6 +39,8 @@ router.route('/auth/register').post(postRegister);
 
 router.route('/auth/login').post(postLogin);
 
-router.route('/auth/user').post(postEditUser);
+router.route('/auth/user').get(getUserData);
+
+router.route('/auth/user/:id').post(postEditUser);
 
 module.exports = router
