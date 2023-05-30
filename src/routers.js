@@ -20,6 +20,8 @@ const {
   postEditUser,
 } = require('./controllers/authController')
 
+const authenticate = require('./middleware/authenticate');
+
 const multer = Multer({
   storage: Multer.memoryStorage(),
   limits: {
@@ -27,9 +29,9 @@ const multer = Multer({
   }
 })
 
-router.route('/').get(passport.authenticate("jwt", { session: false }), getDictionary).post(postDictionary)
+router.route('/').get(authenticate, getDictionary).post(postDictionary)
 
-router.route('/:id').get(getDetailDictionary);
+router.route('/:id').get(authenticate, getDetailDictionary);
 
 router.post('/predictions', multer.single('image'), uploadImage)
 

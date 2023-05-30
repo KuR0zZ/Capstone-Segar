@@ -13,7 +13,7 @@ const options = {
 
 passport.use( new StrategyJwt(options, async (jwt_payloads, done) => {
     try {
-        const user = await User.findOne({ _id:  jwt_payloads.id });
+        const user = await User.findOne({ _id:  jwt_payloads.id }).select(' username email joinedAt ');
         if( user ){
             done(null, user)
         } else {
