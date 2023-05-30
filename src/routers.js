@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Multer = require('multer')
+const passport = require('passport');
 
 const {
   uploadImage,
@@ -12,6 +13,14 @@ const {
   postDictionary,
   getDictionaryDetails,
 } = require('./controllers/vegetablesController')
+const {
+  postRegister,
+  postLogin,
+  getUserData,
+  postEditUser,
+} = require('./controllers/authController')
+
+const authenticate = require('./middleware/authenticate');
 
 const multer = Multer({
   storage: Multer.memoryStorage(),
@@ -20,13 +29,20 @@ const multer = Multer({
   }
 })
 
-router.route('/dictionaries').get(getDictionary).post(postDictionary)
+router.route('/dictionaries').get(authenticate, getDictionary).post(postDictionary)
 
-router.route('/dictionaries/:id').get(getDictionaryDetails);
+router.route('/dictionaries/:id').get(authenticate, getDictionaryDetails);
 
 router.post('/predictions', multer.single('image'), uploadImage)
 
 router.route('/predictions/:id').get(predictionResult)
 
+router.route('/auth/register').post(postRegister);
+
+router.route('/auth/login').post(postLogin);
+
+router.route('/auth/user').get(authenticate, getUserData);
+
+router.route('/auth/user/edit').post(authenticate, postEditUser);
 
 module.exports = router
