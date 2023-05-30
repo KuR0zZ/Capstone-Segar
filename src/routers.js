@@ -11,7 +11,7 @@ const {
 const {
   getDictionary,
   postDictionary,
-  getDetailDictionary,
+  getDictionaryDetails,
 } = require('./controllers/vegetablesController')
 const {
   postRegister,
@@ -29,9 +29,9 @@ const multer = Multer({
   }
 })
 
-router.route('/').get(authenticate, getDictionary).post(postDictionary)
+router.route('/dictionaries').get(authenticate, getDictionary).post(postDictionary)
 
-router.route('/:id').get(authenticate, getDetailDictionary);
+router.route('/dictionaries/:id').get(authenticate, getDictionaryDetails);
 
 router.post('/predictions', multer.single('image'), uploadImage)
 
