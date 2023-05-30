@@ -41,7 +41,9 @@ const postLogin = async (req, res) => {
             return res.status(401).json({error: false, message: 'User not found, check again your email and password'});
         }
         
-        if(bcrypt.compare(userCheckWithEmail.password, password)){
+        const compareresult = await bcrypt.compare(password, userCheckWithEmail.password);
+
+        if(!compareresult){
             return res.status(401).json({error: false, message: 'User not found, check again your email and password'});
         }
     

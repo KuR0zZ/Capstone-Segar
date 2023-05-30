@@ -41,8 +41,8 @@ router.route('/auth/register').post(postRegister);
 
 router.route('/auth/login').post(postLogin);
 
-router.route('/auth/user').get(getUserData);
+router.route('/auth/user').get(authenticate, getUserData);
 
-router.route('/auth/user/edit').post(postEditUser);
+router.route('/auth/user/edit').post(authenticate, postEditUser);
 
 module.exports = router
