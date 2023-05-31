@@ -1,6 +1,7 @@
 const { format } = require('util')
 const { Storage } = require('@google-cloud/storage')
 const Predictions = require('../models/Predictions')
+const userInfo = require('../utils/userInformation')
 
 // Initialize storage with credentials
 const storage = new Storage({ keyFilename: 'google-cloud-key.json' })
@@ -30,14 +31,19 @@ const uploadImage = async (req, res) => {
     })
 
     blobStream.on('finish', async () => {
+      const creator = userInfo(req.headers.authorization)
+      const name = 'Kol'
+      const score = 85
+
       const publicUrl = format(
         `https://storage.googleapis.com/${bucket.name}/${blob.name}`
       )
 
       const prediction = await Predictions.create({
-        name: req.body.name,
-        score: req.body.score,
+        name: name,
+        score: score,
         image: publicUrl,
+        creator: creator.id,
       })
 
       res.status(201).json({
@@ -73,7 +79,28 @@ const predictionResult = async (req, res) => {
   }
 }
 
+const predictionsHistory = async (req, res) => {
+  try {
+    const creator = userInfo(req.headers.authorization)
+    const history = await Predictions.find({ creator: creator.id })
+
+    res.status(200).json({
+      error: false,
+      message: "Predictions history fetched successfully",
+      data: history,
+    });
+  } catch (err) {
+    console.log(err);
+
+    res.status(500).send({
+      error: true,
+      message: "Unable to read list of files!",
+    });
+  }
+}
+
 module.exports = {
   uploadImage,
   predictionResult,
+  predictionsHistory,
 }

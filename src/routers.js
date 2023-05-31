@@ -6,6 +6,7 @@ const passport = require('passport');
 const {
   uploadImage,
   predictionResult,
+  predictionsHistory,
 } = require('./controllers/predictionsController')
 
 const {
@@ -33,7 +34,9 @@ router.route('/dictionaries').get(authenticate, getDictionary).post(postDictiona
 
 router.route('/dictionaries/:id').get(authenticate, getDictionaryDetails);
 
-router.post('/predictions', multer.single('image'),authenticate, uploadImage)
+router.get('/predictions', authenticate, predictionsHistory)
+
+router.post('/predictions', authenticate, multer.single('image'), uploadImage)
 
 router.route('/predictions/:id').get(authenticate, predictionResult)
 
