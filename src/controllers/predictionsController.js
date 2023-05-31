@@ -94,7 +94,7 @@ const predictionsHistory = async (req, res) => {
 
     res.status(500).send({
       error: true,
-      message: "Unable to read list of files!",
+      message: "Unable to fetch predictions history!!!",
     });
   }
 }
