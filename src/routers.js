@@ -34,9 +34,7 @@ router.route('/dictionaries').get(authenticate, getDictionary).post(postDictiona
 
 router.route('/dictionaries/:id').get(authenticate, getDictionaryDetails);
 
-router.get('/predictions', authenticate, predictionsHistory)
-
-router.post('/predictions', authenticate, multer.single('image'), uploadImage)
+router.route('/predictions').get(authenticate, predictionsHistory).post(authenticate, multer.single('image'), uploadImage)
 
 router.route('/predictions/:id').get(authenticate, predictionResult)
 
