@@ -46,7 +46,7 @@ const postLogin = async (req, res) => {
         if(!compareresult){
             return res.status(401).json({error: false, message: 'User not found, check again your email and password'});
         }
-    
+        
         const jwtToken = jwt.sign({ 
             id: userCheckWithEmail._id,
             username: userCheckWithEmail.username,
@@ -54,9 +54,16 @@ const postLogin = async (req, res) => {
             joinedAt: userCheckWithEmail.createdAt,
         }, process.env.JWT_SECRET);
         
+        try {
+            userCheckWithEmail.token = jwtToken;
+            await userCheckWithEmail.save();
+        } catch (err) {
+            return res.status(500).json({error: true, message: 'User not found, check again your email and password'});
+        }
+
         return res.status(200).json({ error: false, message: 'Login successful', data: { token: jwtToken }});
     } catch (err) {
-        return res.status(200).json({ error: true, message: 'Something went wrong' });
+        return res.status(500).json({ error: true, message: 'Something went wrong' });
     }
 }
 
@@ -68,7 +75,7 @@ const getUserData = async (req, res) => {
     
         return res.status(200).json({ error: false, message: "Data successfully decoded", data: {id, username, email, joinedAt }})
     } catch (err) {
-        return res.status(200).json({ error: true, message: "Something went wrong"})
+        return res.status(500).json({ error: true, message: "Something went wrong"})
     }
 }
 
