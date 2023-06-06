@@ -30,7 +30,7 @@ const multer = Multer({
   }
 })
 
-router.route('/dictionaries').get(authenticate, getDictionary).post(postDictionary)
+router.route('/dictionaries').get(authenticate, getDictionary).post(authenticate, postDictionary)
 
 router.route('/dictionaries/:id').get(authenticate, getDictionaryDetails);
 
