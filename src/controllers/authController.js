@@ -9,7 +9,7 @@ const postRegister = async (req, res) => {
         const userAlreadyExist = await User.findOne({ email: email });
 
         if(userAlreadyExist){
-            return res.status(200).json({ error: false, message: 'User already exist'});
+            return res.status(409).json({ error: false, message: 'User already exist'});
         }
 
     } catch(err) {
@@ -26,7 +26,7 @@ const postRegister = async (req, res) => {
         });
     
         await newUser.save();
-        return res.status(200).json({ error: false, message: 'User registered'});
+        return res.status(201).json({ error: false, message: 'User registered'});
     } catch (err) {
         return res.status(500).json({ error: true, message: 'Something went wrong, check your data'});
     }
