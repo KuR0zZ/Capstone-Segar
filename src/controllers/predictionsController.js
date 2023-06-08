@@ -40,7 +40,7 @@ const uploadImage = async (req, res) => {
       )
 
       const resizedImage = await sharp(req.file.buffer)
-        .resize(224, 224)
+        .resize(256, 256)
         .removeAlpha()
         .toBuffer()
 
