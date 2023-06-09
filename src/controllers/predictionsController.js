@@ -22,6 +22,22 @@ const uploadImage = async (req, res) => {
       return res.status(400).json({ message: 'Valid extension: ' + arrayOfAllowedExtensions.join(', ') })
     }
 
+    // // Test Predict Name 
+    // const resizedImage1 = await sharp(req.file.buffer).resize(256, 256).removeAlpha().toBuffer()
+    // const supportedVegetables = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
+    // const predictVegetableName = await predict(resizedImage1, process.env.VEGETABLE_NAME_MODEL)
+    // const result1 = predictVegetableName.argMax(1).dataSync()[0]
+
+    // // Test Predict Freshness 
+    // const resizedImage2 = await sharp(req.file.buffer).resize(256, 256).removeAlpha().toBuffer()
+
+
+    // // Respond
+    // res.json({
+    //   prediction_name: supportedVegetables[result1],
+    //   prediction_freshness: expectedOutput[result2]
+    // })
+
     const fileName = req.file.originalname.replace(/\s+/g, '-')
     const blob = bucket.file(fileName)
     const blobStream = blob.createWriteStream({
@@ -44,14 +60,17 @@ const uploadImage = async (req, res) => {
         .removeAlpha()
         .toBuffer()
 
-      const supportedVegetables = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
+      const vegetablesLabel = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
       const predictVegetableName = await predict(resizedImage, process.env.VEGETABLE_NAME_MODEL)
       const vegetableName = predictVegetableName.argMax(1).dataSync()[0]
-      const score = predictVegetableName.softmax().max().dataSync()[0] * 100
+
+      const freshnessLabel = ['Fresh', 'Rotten']
+      const predictVegetableFreshness = await predict(resizedImage, process.env.FRESH_ROTTEN_MODEL)
+      const vegetableFreshness = predictVegetableFreshness.dataSync()[0]
 
       const prediction = await Predictions.create({
-        name: supportedVegetables[vegetableName],
-        score: Number(score.toFixed(2)),
+        name: vegetablesLabel[vegetableName],
+        score: freshnessLabel[vegetableFreshness],
         image: publicUrl,
         creator: creator.id,
       })
