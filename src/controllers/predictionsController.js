@@ -30,12 +30,14 @@ const uploadImage = async (req, res) => {
 
     // // Test Predict Freshness 
     // const resizedImage2 = await sharp(req.file.buffer).resize(256, 256).removeAlpha().toBuffer()
-
+    // const freshnessLabel = ['Rotten', 'Fresh']
+    // const predictVegetableFreshness = await predict(resizedImage2, process.env.FRESH_ROTTEN_MODEL)
+    // const vegetableFreshness = predictVegetableFreshness.dataSync()[0]
 
     // // Respond
     // res.json({
     //   prediction_name: supportedVegetables[result1],
-    //   prediction_freshness: expectedOutput[result2]
+    //   prediction_freshness: freshnessLabel[vegetableFreshness]
     // })
 
     const fileName = req.file.originalname.replace(/\s+/g, '-')
