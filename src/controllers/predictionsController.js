@@ -66,7 +66,7 @@ const uploadImage = async (req, res) => {
       const predictVegetableName = await predict(resizedImage, process.env.VEGETABLE_NAME_MODEL)
       const vegetableName = predictVegetableName.argMax(1).dataSync()[0]
 
-      const freshnessLabel = ['Fresh', 'Rotten']
+      const freshnessLabel = ['Rotten', 'Fresh']
       const predictVegetableFreshness = await predict(resizedImage, process.env.FRESH_ROTTEN_MODEL)
       const vegetableFreshness = predictVegetableFreshness.dataSync()[0]
 
