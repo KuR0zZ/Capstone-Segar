@@ -7,7 +7,7 @@ const sharp = require('sharp')
 
 // Initialize storage with credentials
 const storage = new Storage({ keyFilename: 'google-cloud-key.json' })
-const bucket = storage.bucket('segar-test-bucket')
+const bucket = storage.bucket('capstone-segar-bucket')
 
 const uploadImage = async (req, res) => {
   try {
@@ -40,18 +40,21 @@ const uploadImage = async (req, res) => {
       )
 
       const resizedImage = await sharp(req.file.buffer)
-        .resize(224, 224)
+        .resize(256, 256)
         .removeAlpha()
         .toBuffer()
 
-      const supportedVegetables = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
+      const vegetablesLabel = ['Broccoli', 'Carrot', 'Cauliflower', 'Tomato']
       const predictVegetableName = await predict(resizedImage, process.env.VEGETABLE_NAME_MODEL)
       const vegetableName = predictVegetableName.argMax(1).dataSync()[0]
-      const score = predictVegetableName.softmax().max().dataSync()[0] * 100
+
+      const freshnessLabel = ['Rotten', 'Fresh']
+      const predictVegetableFreshness = await predict(resizedImage, process.env.FRESH_ROTTEN_MODEL)
+      const vegetableFreshness = predictVegetableFreshness.dataSync()[0]
 
       const prediction = await Predictions.create({
-        name: supportedVegetables[vegetableName],
-        score: Number(score.toFixed(2)),
+        name: vegetablesLabel[vegetableName],
+        score: freshnessLabel[vegetableFreshness],
         image: publicUrl,
         creator: creator.id,
       })
@@ -65,8 +68,7 @@ const uploadImage = async (req, res) => {
 
     blobStream.end(req.file.buffer)
   } catch (error) {
-    // res.status(500).json({ message: `Could not upload the image: ${req.file.originalname}` })
-    res.status(500).send(error.message)
+    res.status(500).json({ message: `Could not upload the image: ${req.file.originalname}` })
   }
 }
 
