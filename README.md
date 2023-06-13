@@ -154,6 +154,19 @@
 }
 ```
 
+### Logout
+
+- Path : `/api/v1/auth/logout`
+- Method : `POST`
+- Example Response :
+
+```json
+{
+  "error": false,
+  "message": "User logged out",
+}
+```
+
 ### User Data
 
 - Path : `/api/v1/auth/user`
