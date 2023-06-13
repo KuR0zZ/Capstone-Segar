@@ -7,7 +7,7 @@ const sharp = require('sharp')
 
 // Initialize storage with credentials
 const storage = new Storage({ keyFilename: 'google-cloud-key.json' })
-const bucket = storage.bucket('segar-test-bucket')
+const bucket = storage.bucket('capstone-segar-bucket')
 
 const uploadImage = async (req, res) => {
   try {
@@ -21,24 +21,6 @@ const uploadImage = async (req, res) => {
     if (!arrayOfAllowedExtensions.includes(fileExtension)) {
       return res.status(400).json({ message: 'Valid extension: ' + arrayOfAllowedExtensions.join(', ') })
     }
-
-    // // Test Predict Name 
-    // const resizedImage1 = await sharp(req.file.buffer).resize(256, 256).removeAlpha().toBuffer()
-    // const supportedVegetables = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
-    // const predictVegetableName = await predict(resizedImage1, process.env.VEGETABLE_NAME_MODEL)
-    // const result1 = predictVegetableName.argMax(1).dataSync()[0]
-
-    // // Test Predict Freshness 
-    // const resizedImage2 = await sharp(req.file.buffer).resize(256, 256).removeAlpha().toBuffer()
-    // const freshnessLabel = ['Rotten', 'Fresh']
-    // const predictVegetableFreshness = await predict(resizedImage2, process.env.FRESH_ROTTEN_MODEL)
-    // const vegetableFreshness = predictVegetableFreshness.dataSync()[0]
-
-    // // Respond
-    // res.json({
-    //   prediction_name: supportedVegetables[result1],
-    //   prediction_freshness: freshnessLabel[vegetableFreshness]
-    // })
 
     const fileName = req.file.originalname.replace(/\s+/g, '-')
     const blob = bucket.file(fileName)
@@ -62,7 +44,7 @@ const uploadImage = async (req, res) => {
         .removeAlpha()
         .toBuffer()
 
-      const vegetablesLabel = ['Brokoli', 'Wortel', 'Kembang Kol', 'Tomat']
+      const vegetablesLabel = ['Broccoli', 'Carrot', 'Cauliflower', 'Tomato']
       const predictVegetableName = await predict(resizedImage, process.env.VEGETABLE_NAME_MODEL)
       const vegetableName = predictVegetableName.argMax(1).dataSync()[0]
 
@@ -86,8 +68,7 @@ const uploadImage = async (req, res) => {
 
     blobStream.end(req.file.buffer)
   } catch (error) {
-    // res.status(500).json({ message: `Could not upload the image: ${req.file.originalname}` })
-    res.status(500).send(error.message)
+    res.status(500).json({ message: `Could not upload the image: ${req.file.originalname}` })
   }
 }
 
