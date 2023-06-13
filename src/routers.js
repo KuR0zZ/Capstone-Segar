@@ -17,6 +17,7 @@ const {
 const {
   postRegister,
   postLogin,
+  postLogout,
   getUserData,
   postEditUser,
 } = require('./controllers/authController')
@@ -41,6 +42,8 @@ router.route('/predictions/:id').get(authenticate, predictionResult)
 router.route('/auth/register').post(postRegister);
 
 router.route('/auth/login').post(postLogin);
+
+router.route('/auth/logout').post(authenticate, postLogout);
 
 router.route('/auth/user').get(authenticate, getUserData);
 

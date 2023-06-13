@@ -67,6 +67,22 @@ const postLogin = async (req, res) => {
     }
 }
 
+const postLogout = async (req, res) => {
+    const { email } = req.body;
+    
+    try {
+        const user = await User.findOne({ email: email });
+
+        user.token = 'null';
+
+        await user.save();
+
+        return res.status(200).json({ error: false, message: 'User logged out'});
+    } catch (err) {
+        return res.status(500).json({ error: true, message: 'Something went wrong'});
+    }
+}
+
 const getUserData = async (req, res) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
@@ -102,6 +118,7 @@ const postEditUser = async (req, res) => {
 module.exports = {
     postRegister,
     postLogin,
+    postLogout,
     postEditUser,
     getUserData,
 }
