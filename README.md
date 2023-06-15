@@ -227,7 +227,7 @@ The request body should be encoded as `multipart/form-data`
 
 ### Login
 
-- Path : `/api/v1/auth/login`
+- Path : `/api/v1/vegetables/auth/login`
 - Method : `POST`
 - Example Body Request :
 
@@ -252,7 +252,7 @@ The request body should be encoded as `multipart/form-data`
 
 ### Register
 
-- Path : `/api/v1/auth/register`
+- Path : `/api/v1/vegetables/auth/register`
 - Method : `POST`
 - Example Body Request :
 
@@ -275,7 +275,7 @@ The request body should be encoded as `multipart/form-data`
 
 ### Logout
 
-- Path : `/api/v1/auth/logout`
+- Path : `/api/v1/vegetables/auth/logout`
 - Method : `POST`
 - Example Body Request :
 
