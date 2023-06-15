@@ -80,7 +80,7 @@ MONGO_URI = your_mongodb_uri
 
 ### Global Headers
 
-The following is required for all API request except login endpoint:
+The following is required for all API request (except login endpoint) :
 
 - `Authorization`: Include a valid access token as a Bearer token for authentication purposes
 
@@ -305,32 +305,10 @@ The request body should be encoded as `multipart/form-data`
   "error": false,
   "message": "Data successfully decoded",
   "data": {
-    "id": "647579be74489779b1e9193e",
-    "username": "segar2rev3",
-    "email": "segar2rev3@gmail.com",
+    "id": "647579be74489779b2e1193e",
+    "username": "your_username",
+    "email": "your_email@email.com",
     "joinedAt": "2023-05-30T04:20:30.304+00:00"
   }
-}
-```
-
-### Edit User Data
-
-- Path : `/api/v1/auth/user/edit`
-- Method : `POST`
-- Example Body Request :
-
-```
-{
-  "username": "segarapp5revv",
-  "email": "segarapp5@gmail.com"
-}
-```
-
-- Example Response :
-
-```json
-{
-  "error": false,
-  "message": "Data has been edited"
 }
 ```
