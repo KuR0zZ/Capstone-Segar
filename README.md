@@ -296,7 +296,7 @@ The request body should be encoded as `multipart/form-data`
 
 ### User Data
 
-- Path : `/api/v1/auth/user`
+- Path : `/api/v1/vegetables/auth/user`
 - Method : `GET`
 - Example Response :
 
